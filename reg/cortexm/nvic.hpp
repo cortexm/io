@@ -114,7 +114,7 @@ struct Nvic {
         __asm volatile ("cpsid i" : : : "memory");
     }
 
-    static constexpr size_t BASE = 0xe000e100;
+    static const size_t BASE = 0xe000e100;
 };
 
 static Nvic &NVIC = *reinterpret_cast<Nvic *>(Nvic::BASE);

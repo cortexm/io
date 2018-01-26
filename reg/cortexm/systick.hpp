@@ -89,7 +89,7 @@ struct Systick {
     volatile Val VAL;  // SysTick reload value register
     volatile Calib CALIB;  // SysTick calibration value register
 
-    static constexpr size_t BASE = 0xe000e010;
+    static const size_t BASE = 0xe000e010;
 };
 
 static Systick &SYSTICK = *reinterpret_cast<Systick *>(Systick::BASE);

@@ -273,7 +273,7 @@ struct Scb {
     volatile uint32_t BFAR;  // Bus fault address register  (M3, M4, M7)
     volatile uint32_t AFSR;  // Auxiliary fault status register  (M4, M7)
 
-    static constexpr size_t BASE = 0xe000ed00;
+    static const size_t BASE = 0xe000ed00;
 };
 
 static Scb &SCB = *reinterpret_cast<Scb *>(Scb::BASE);

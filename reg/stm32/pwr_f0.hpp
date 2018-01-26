@@ -75,7 +75,7 @@ struct Pwr {
     volatile Cr CR;  // Power control register
     volatile Csr CSR;  // Power control status register
 
-    static constexpr size_t BASE = 0x40007000;
+    static const size_t BASE = 0x40007000;
 };
 
 static Pwr &PWR = *reinterpret_cast<Pwr *>(Pwr::BASE);
