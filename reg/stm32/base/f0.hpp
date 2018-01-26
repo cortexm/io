@@ -1,3 +1,12 @@
+/**
+* Peripheral Definition File
+*
+* BASE - BASE peripheral addresses
+*
+* MCUs containing this peripheral:
+*  - STM32F0xx
+*/
+
 #pragma once
 
 #include <cstdint>

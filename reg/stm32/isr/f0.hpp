@@ -1,7 +1,7 @@
 /**
 * Peripheral Definition File
 *
-* FLASH - third version
+* ISR - ISR numbers
 *
 * MCUs containing this peripheral:
 *  - STM32F0xx

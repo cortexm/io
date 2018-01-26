@@ -1,7 +1,7 @@
 /**
 * Peripheral Definition File
 *
-* FLASH - third version
+* FLASH - Flash memory controller
 *
 * MCUs containing this peripheral:
 *  - STM32F0xx
