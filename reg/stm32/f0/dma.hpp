@@ -1,7 +1,7 @@
 /**
 * Peripheral Definition File
 *
-* DMA
+* DMA - Direct memory access controller
 *
 * MCUs containing this peripheral:
 *  - STM32F0xx

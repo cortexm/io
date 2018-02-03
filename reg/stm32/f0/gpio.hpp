@@ -1,7 +1,7 @@
 /**
 * Peripheral Definition File
 *
-* GPIO
+* GPIO - General purpose and alternate function I/Os
 *
 * MCUs containing this peripheral:
 *  - STM32F0xx

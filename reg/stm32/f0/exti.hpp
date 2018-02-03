@@ -1,7 +1,7 @@
 /**
 * Peripheral Definition File
 *
-* EXTI
+* EXTI - External interrupt/event controller
 *
 * MCUs containing this peripheral:
 *  - STM32F0xx
