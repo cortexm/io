@@ -247,8 +247,4 @@ struct Exti {
     volatile Pr PR;
 };
 
-static inline constexpr Exti &EXTI(const size_t base) {
-    return *reinterpret_cast<Exti *>(base);
-}
-
 }

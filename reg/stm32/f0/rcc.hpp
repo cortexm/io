@@ -434,9 +434,14 @@ struct Rcc {
     volatile Cfgr3 CFGR3;  // Clock configuration register 3
     volatile Cr2 CR2;  // Clock control register 2
 
-    static const size_t BASE = 0x40021000;
 };
 
-static Rcc &RCC = *reinterpret_cast<Rcc *>(Rcc::BASE);
+namespace base {
+
+static const size_t RCC = 0x40021000;
+
+}
+
+static Rcc &RCC = *reinterpret_cast<Rcc *>(base::RCC);
 
 }
