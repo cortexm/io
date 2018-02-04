@@ -23,6 +23,8 @@
 namespace io {
 
 struct Exti {
+    /** Mask register
+     */
     struct Mr {
         Mr() {}
         Mr(uint32_t raw) { r = raw; }
@@ -79,6 +81,8 @@ struct Exti {
         }
     };
 
+    /** Trigger selection register
+     */
     struct Tr {
         Tr() {}
         Tr(uint32_t raw) { r = raw; }
@@ -134,6 +138,8 @@ struct Exti {
         }
     };
 
+    /** Software interrupt event register
+     */
     struct Swier {
         Swier() {}
         Swier(uint32_t raw) { r = raw; }
@@ -239,12 +245,12 @@ struct Exti {
         }
     };
 
-    volatile Mr IMR;
-    volatile Mr EMR;
-    volatile Tr RTSR;
-    volatile Tr FTSR;
-    volatile Swier SWIER;
-    volatile Pr PR;
+    volatile Mr IMR;  // Interrupt mask register
+    volatile Mr EMR;  // Event mask register
+    volatile Tr RTSR;  // Rising trigger selection register
+    volatile Tr FTSR;  // Falling trigger selection register
+    volatile Swier SWIER;  // Software interrupt event register
+    volatile Pr PR;  // Pending register
 };
 
 }
