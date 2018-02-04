@@ -64,7 +64,7 @@ struct Syscfg {
         /** external interrupt configuration register 1
          */
         Exticr() {}
-        Exticr(uint32_t raw) { r = raw; }
+        Exticr(uint32_t raw0, uint32_t raw1, uint32_t raw2, uint32_t raw3) { r[0] = raw0; r[1] = raw1; r[2] = raw2; r[3] = raw3; }
         union {
             uint32_t r[4];
             struct {
@@ -91,12 +91,12 @@ struct Syscfg {
             } b;
         };
         struct Exti {
-            static const GPIOA = 0;
-            static const GPIOB = 1;
-            static const GPIOC = 2;
-            static const GPIOD = 3;
-            static const GPIOE = 4;
-            static const GPIOF = 5;
+            static const uint32_t GPIOA = 0;
+            static const uint32_t GPIOB = 1;
+            static const uint32_t GPIOC = 2;
+            static const uint32_t GPIOD = 3;
+            static const uint32_t GPIOE = 4;
+            static const uint32_t GPIOF = 5;
         };
     };
 
