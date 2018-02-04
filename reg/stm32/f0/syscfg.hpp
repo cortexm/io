@@ -118,10 +118,10 @@ struct Syscfg {
         };
     };
 
-    volatile Cfgr1 CFGR1;
+    volatile Cfgr1 CFGR1;  // configuration register 1
     uint32_t __res0;
-    volatile Exticr EXTICR;
-    volatile Cfgr2 CFGR2;
+    volatile Exticr EXTICR;  // external interrupt configuration register 1
+    volatile Cfgr2 CFGR2;  // configuration register 2
 };
 
 namespace base {
