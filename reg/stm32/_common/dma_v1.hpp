@@ -10,9 +10,6 @@
 *  - STM32L0xx
 *  - STM32L1xx
 *  - STM32L4xx
-*
-*  author:
-*    Pavel Revak
 */
 
 #pragma once
