@@ -64,6 +64,7 @@ struct Syscfg {
         /** external interrupt configuration register 1
          */
         Exticr() {}
+        Exticr(uint32_t *raw) { r[0] = raw[0]; r[1] = raw[1]; r[2] = raw[2]; r[3] = raw[3]; }
         Exticr(uint32_t raw0, uint32_t raw1, uint32_t raw2, uint32_t raw3) { r[0] = raw0; r[1] = raw1; r[2] = raw2; r[3] = raw3; }
         union {
             uint32_t r[4];
