@@ -4,7 +4,7 @@
 * DMA - Direct memory access controller
 *
 * MCUs containing this peripheral:
-*  - STM32F0xx
+*  - STM32L0xx
 */
 
 #pragma once
