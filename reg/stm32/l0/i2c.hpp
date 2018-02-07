@@ -4,7 +4,7 @@
 * I2C - Inter-integrated circuit interface
 *
 * MCUs containing this peripheral:
-*  - STM32F0xx
+*  - STM32L0xx
 */
 
 #pragma once
