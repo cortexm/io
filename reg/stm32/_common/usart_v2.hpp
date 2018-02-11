@@ -48,7 +48,7 @@ struct Usart {
                 uint32_t RTOIE : 1;  // Receiver timeout interrupt enable
                 uint32_t EOBIE : 1;  // End of Block interrupt enable
                 uint32_t M1 : 1;  // Word length 1
-                uint32_t : 5;
+                uint32_t : 3;
             } b;
         };
     };
@@ -110,10 +110,12 @@ struct Usart {
                 uint32_t DEM : 1;  // Driver enable mode
                 uint32_t DEP : 1;  // Driver enable polarity selection
                 uint32_t : 1;
-                uint32_t SCARCNT : 3;  //  Smartcard auto-retry count
-                uint32_t WUS : 2;  // Wakeup from Stop mode interrupt flag selection
-                uint32_t WUFIE : 1;  // Wakeup from Stop mode interrupt enable
-                uint32_t : 9;
+                uint32_t SCARCNT : 3;  // Smartcard auto-retry count
+                uint32_t WUS : 2;  // Wakeup from Stop mode interrupt flag selection (F0, L0)
+                uint32_t WUFIE : 1;  // Wakeup from Stop mode interrupt enable (F0, L0)
+                uint32_t UCESM : 1;  // USART Clock Enable in Stop mode  (L0)
+                uint32_t TCBGTIE : 1;  // Transmission complete before guard time interrupt enable (L4)
+                uint32_t : 7;
             } b;
         };
     };
@@ -208,10 +210,12 @@ struct Usart {
                 const uint32_t CMF : 1;  // Character match flag
                 const uint32_t SBKF : 1;  // Send break flag
                 const uint32_t RWU : 1;  // Receiver wakeup from Mute mode
-                const uint32_t WUF : 1;  // Wakeup from Stop mode flag
+                const uint32_t WUF : 1;  // Wakeup from Stop mode flag (F0, L0)
                 const uint32_t TEACK : 1;  // Transmit enable acknowledge flag
-                const uint32_t REACK : 1;  // Receive enable acknowledge flag
-                uint32_t : 9;
+                const uint32_t REACK : 1;  // Receive enable acknowledge flag (F0, L0)
+                uint32_t : 2;
+                const uint32_t TCBGT : 1;  // Transmission complete before guard time completion (L4)
+                uint32_t : 6;
             } b;
         };
     };
@@ -240,7 +244,7 @@ struct Usart {
                 uint32_t : 4;
                 uint32_t CMCF : 1;  // Character match clear flag
                 uint32_t : 2;
-                uint32_t WUCF : 1;  // Wakeup from Stop mode clear flag
+                uint32_t WUCF : 1;  // Wakeup from Stop mode clear flag (F0, L0)
                 uint32_t : 11;
             } b;
         };
@@ -251,7 +255,8 @@ struct Usart {
     struct Dr {
         union {
             uint32_t r;
-            uint32_t DR;
+            uint32_t DR;  // Data register
+            uint16_t DR16;  // 16 bit access
         };
     };
 
