@@ -5,9 +5,9 @@
 *
 * MCUs containing this peripheral:
 *  - STM32F1xx
-*  - STM32L1xx
 *  - STM32F2xx
 *  - STM32F4xx
+*  - STM32L1xx
 */
 
 #pragma once
@@ -41,7 +41,7 @@ struct Iwdg {
         union {
             uint32_t r;
             uint32_t PRE;  // 32 bit access
-            uint32_t PRE16;  // 16 bit access
+            uint16_t PRE16;  // 16 bit access
             struct {
                 uint32_t PRE : 3;  // prescaler divider
                 uint32_t : 29;
@@ -66,7 +66,7 @@ struct Iwdg {
         union {
             uint32_t r;
             uint32_t RL;  // 32 bit access
-            uint32_t RL16;  // 16 bit access
+            uint16_t RL16;  // 16 bit access
             struct {
                 uint32_t RL : 12;  // Watchdog counter reload value
                 uint32_t : 20;

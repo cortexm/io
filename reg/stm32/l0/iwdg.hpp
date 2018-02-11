@@ -4,7 +4,7 @@
 * IWDG - Independent watchdog
 *
 * MCUs containing this peripheral:
-*  - STM32F0xx
+*  - STM32L0xx
 */
 
 #pragma once
