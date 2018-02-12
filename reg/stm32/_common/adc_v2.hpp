@@ -18,6 +18,8 @@
 namespace io {
 
 struct Adc {
+    /** Interrupt and status register
+     */
     struct Isr {
         Isr() {}
         Isr(uint32_t raw) { r = raw; }
@@ -36,6 +38,8 @@ struct Adc {
         };
     };
 
+    /** Interrupt enable register
+     */
     struct Ier {
         Ier() {}
         Ier(uint32_t raw) { r = raw; }
@@ -54,6 +58,8 @@ struct Adc {
         };
     };
 
+    /** Control register
+     */
     struct Cr {
         Cr() {}
         Cr(uint32_t raw) { r = raw; }
@@ -71,6 +77,8 @@ struct Adc {
         };
     };
 
+    /** Configuration register 1
+     */
     struct Cfgr1 {
         Cfgr1() {}
         Cfgr1(uint32_t raw) { r = raw; }
@@ -98,14 +106,16 @@ struct Adc {
                 uint32_t : 1;
             } b;
         };
-        enum class Res {
-            RES_12 = 0,
-            RES_10 = 1,
-            RES_8 = 2,
-            RES_6 = 3,
+        struct Res {
+            static const uint32_t RES_12 = 0;
+            static const uint32_t RES_10 = 1;
+            static const uint32_t RES_8 = 2;
+            static const uint32_t RES_6 = 3;
         };
     };
 
+    /** Configuration register 2
+     */
     struct Cfgr2 {
         Cfgr2() {}
         Cfgr2(uint32_t raw) { r = raw; }
@@ -116,13 +126,15 @@ struct Adc {
                 uint32_t CKMODE : 2;  // ADC clock mode
             } b;
         };
-        enum class Ckmode {
-            ADCCLK = 0,
-            PCLK_DIV2 = 1,
-            PCLK_DIV4 = 2,
+        struct Ckmode {
+            static const uint32_t ADCCLK = 0;
+            static const uint32_t PCLK_DIV2 = 1;
+            static const uint32_t PCLK_DIV4 = 2;
         };
     };
 
+    /** Sampling time register
+     */
     struct Smpr {
         Smpr() {}
         Smpr(uint32_t raw) { r = raw; }
@@ -133,18 +145,20 @@ struct Adc {
                 uint32_t : 29;
             } b;
         };
-        enum class Smp {
-            SMP_1_5 = 0,
-            SMP_7_5 = 1,
-            SMP_13_5 = 2,
-            SMP_28_5 = 3,
-            SMP_41_5 = 4,
-            SMP_55_5 = 5,
-            SMP_71_5 = 6,
-            SMP_239_5 = 7,
+        struct Smp {
+            static const uint32_t SMP_1_5 = 0;
+            static const uint32_t SMP_7_5 = 1;
+            static const uint32_t SMP_13_5 = 2;
+            static const uint32_t SMP_28_5 = 3;
+            static const uint32_t SMP_41_5 = 4;
+            static const uint32_t SMP_55_5 = 5;
+            static const uint32_t SMP_71_5 = 6;
+            static const uint32_t SMP_239_5 = 7;
         };
     };
 
+    /** Watchdog threshold register
+     */
     struct Tr {
         Tr() {}
         Tr(uint32_t raw) { r = raw; }
@@ -159,6 +173,8 @@ struct Adc {
         };
     };
 
+    /** Channel selection register
+     */
     struct Chselr {
         Chselr() {}
         Chselr(uint32_t raw) { r = raw; }
@@ -195,6 +211,8 @@ struct Adc {
         }
     };
 
+    /** Data register
+     */
     struct Dr {
         union {
             uint32_t r;
@@ -202,6 +220,8 @@ struct Adc {
         };
     };
 
+    /** Commong configuration register
+     */
     struct Ccr {
         Ccr() {}
         Ccr(uint32_t raw) { r = raw; }
@@ -217,20 +237,20 @@ struct Adc {
         };
     };
 
-    volatile Isr ISR;
-    volatile Ier IER;
-    volatile Cr CR;
-    volatile Cfgr1 CFGR1;
-    volatile Cfgr2 CFGR2;
-    volatile Smpr SMPR;
+    volatile Isr ISR;  // Interrupt and status register
+    volatile Ier IER;  // Interrupt enable register
+    volatile Cr CR;  // Control register
+    volatile Cfgr1 CFGR1;  // Configuration register 1
+    volatile Cfgr2 CFGR2;  // Configuration register 2
+    volatile Smpr SMPR;  // Sampling time register
     uint32_t __res0[2];
-    volatile Tr TR;
+    volatile Tr TR;  // Watchdog threshold register
     uint32_t __res1;
-    volatile Chselr CHSELR;
+    volatile Chselr CHSELR;  // Channel selection register
     uint32_t __res2[5];
-    volatile Dr DR;
+    volatile Dr DR;  // Data register
     uint32_t __res3[177];
-    volatile Ccr CCR;
+    volatile Ccr CCR;  // Commong configuration register
 };
 
 }

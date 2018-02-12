@@ -20,6 +20,8 @@
 namespace io {
 
 struct Dma {
+    /** Interrupt status register
+     */
     struct Isr {
         Isr() {}
         Isr(uint32_t raw) { r = raw; }
@@ -75,6 +77,8 @@ struct Dma {
         }
     };
 
+    /** Interrupt flag clear register
+     */
     struct Ifcr {
         Ifcr() {}
         Ifcr(uint32_t raw) { r = raw; }
@@ -139,7 +143,11 @@ struct Dma {
         }
     };
 
+    /** Channel registers
+     */
     struct Channel {
+        /** Configuration register
+         */
         struct Ccr {
             Ccr() {}
             Ccr(uint32_t raw) { r = raw; }
@@ -176,6 +184,8 @@ struct Dma {
             };
         };
 
+        /** Number of data register
+         */
         struct Cndtr {
             union {
                 uint32_t r;
@@ -183,6 +193,8 @@ struct Dma {
             };
         };
 
+        /** Peripheral address register
+         */
         struct Cpar {
             union {
                 uint32_t r;
@@ -190,6 +202,8 @@ struct Dma {
             };
         };
 
+        /** Memory address register
+         */
         struct Cmar {
             union {
                 uint32_t r;
@@ -197,13 +211,15 @@ struct Dma {
             };
         };
 
-        volatile Ccr CCR;
-        volatile Cndtr CNDTR;
-        volatile Cpar CPAR;
-        volatile Cmar CMAR;
+        volatile Ccr CCR;  // Configuration register
+        volatile Cndtr CNDTR;  // Number of data register
+        volatile Cpar CPAR;  // Peripheral address register
+        volatile Cmar CMAR;  // Memory address register
         uint32_t __res0;
     };
 
+    /** Selection Register
+     */
     struct Cselr {
         Cselr() {}
         Cselr(uint32_t raw) { r = raw; }
@@ -229,11 +245,11 @@ struct Dma {
         }
     };
 
-    volatile Isr ISR;
-    volatile Ifcr IFCR;
-    Channel _CHANNEL[7];
+    volatile Isr ISR;  // Interrupt status register
+    volatile Ifcr IFCR;  // Interrupt flag clear register
+    Channel _CHANNEL[7];  // Channel registers
     uint32_t __res1[20];
-    volatile Cselr CSELR;
+    volatile Cselr CSELR;  // Selection Register
 
     Channel &CHANNEL(const unsigned channel) {
         return _CHANNEL[channel - 1];
