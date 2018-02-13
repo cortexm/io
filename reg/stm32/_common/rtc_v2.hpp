@@ -137,7 +137,7 @@ struct Rtc {
                 uint32_t TAMP3F : 1;  // RTC_TAMP3 detection flag
                 const uint32_t RECALPF : 1;  // Recalibration pending Flag
                 uint32_t : 15;
-            };
+            } b;
         };
     };
 
@@ -153,7 +153,7 @@ struct Rtc {
                 uint32_t : 1;
                 uint32_t PREDIV_A : 7;  // Synchronous prescaler factor
                 uint32_t : 9;
-            };
+            } b;
         };
     };
 
@@ -168,7 +168,7 @@ struct Rtc {
             struct {
                 uint32_t WUT : 16;  // Wakeup auto-reload value
                 uint32_t : 16;
-            };
+            } b;
         };
     };
 
@@ -194,7 +194,7 @@ struct Rtc {
                 uint32_t DT : 2;  // Date tens in BCD format
                 uint32_t WDSEL : 1;  // Week day selection
                 uint32_t MSK4 : 1;  // Alarm A date mask
-            };
+            } b;
         };
     };
 
@@ -209,7 +209,7 @@ struct Rtc {
             struct {
                 uint32_t KEY : 8;  // Write protection key
                 uint32_t : 24;
-            };
+            } b;
         };
     };
 
@@ -223,7 +223,7 @@ struct Rtc {
             struct {
                 const uint32_t SS : 16;  // sub seconds
                 uint32_t : 16;
-            };
+            } b;
         };
     };
 
@@ -237,8 +237,8 @@ struct Rtc {
             struct {
                 uint32_t SUBFS : 15;  // Subtract a fraction of a second
                 uint32_t : 16;
-                uint32_t SUBFS : 1;  // Add one second
-            };
+                uint32_t ADD1S : 1;  // Add one second
+            } b;
         };
     };
 
@@ -293,7 +293,7 @@ struct Rtc {
             struct {
                 const uint32_t SS : 16;  // sub seconds
                 uint32_t : 16;
-            };
+            } b;
         };
     };
 
@@ -305,13 +305,13 @@ struct Rtc {
         union {
             uint32_t r;
             struct {
-                uint32_t CALM : 8;  // calibration minus
+                uint32_t CALM : 9;  // calibration minus
                 uint32_t : 4;
                 uint32_t CALW16 : 1;  // Use a 16-second calibration cycle period
                 uint32_t CALW8 : 1;  // Use an 8-second calibration cycle period
                 uint32_t CALP : 1;  // Increase frequency of RTC by 488.5 ppm
                 uint32_t : 16;
-            };
+            } b;
         };
     };
 
@@ -331,18 +331,19 @@ struct Rtc {
                 uint32_t TAMP3E : 1;  // RTC_TAMP3 detection enable
                 uint32_t TAMP3TRG : 1;  // Active level for RTC_TAMP3 input
                 uint32_t TAMPTS : 1;  // Activate time-stamp on tamper detection event
-                uint32_t TAMPFREQ : 1;  // Tamper sampling frequency
-                uint32_t TAMPFLT : 1;  // RTC_TAMPx filter count
-                uint32_t TAMPPRCH : 1;  // RTC_TAMPx precharge duration
+                uint32_t TAMPFREQ : 3;  // Tamper sampling frequency
+                uint32_t TAMPFLT : 2;  // RTC_TAMPx filter count
+                uint32_t TAMPPRCH : 2;  // RTC_TAMPx precharge duration
                 uint32_t TAMPPUDIS : 1;  // RTC_TAMPx pull-up disable
+                uint32_t : 2;
                 uint32_t PC13VALUE : 1;  // RTC_ALARM output type/PC13 value
                 uint32_t PC13MODE : 1;  // PC13 mode
                 uint32_t PC14VALUE : 1;  // PC14 value
                 uint32_t PC14MODE : 1;  // PC14 mode
                 uint32_t PC15VALUE : 1;  // PC15 value
                 uint32_t PC15MODE : 1;  // PC15 mode
-                uint32_t : 16;
-            };
+                uint32_t : 8;
+            } b;
         };
     };
 
@@ -358,7 +359,7 @@ struct Rtc {
                 uint32_t : 9;
                 uint32_t MASKSS : 4;  // Mask the most-significant bits starting at this bit
                 uint32_t : 4;
-            };
+            } b;
         };
     };
 
@@ -381,7 +382,7 @@ struct Rtc {
     volatile Tafcr TAFCR;
     volatile Alrmassr ALRMASSR;
     uint32_t __res2[2];
-    volatile uint32_t BKP[32];  // (F0:5, F2:20, F3:32, F4:20, F7: 32, L0: 5, L1:32, L4:32, H7:32)
+    volatile uint32_t BKP[32];  // (F0:5, F2:20, F3:32, F4:20, F7:32, L0:5, L1:32, L4:32, H7:32)
 };
 
 }
