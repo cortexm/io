@@ -4,7 +4,7 @@
 * RTC - Real-time clock
 *
 * MCUs containing this peripheral:
-*  - STM32F0xx
+*  - STM32F3xx
 */
 
 #pragma once
