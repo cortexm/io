@@ -121,23 +121,24 @@ struct Rtc {
             uint32_t r;
             struct {
                 const uint32_t ALRAWF : 1;  // Alarm A write flag
-                uint32_t : 1;
+                const uint32_t ALRBWF : 1;  // Alarm B write flag (F2, F3, F4, F7, H7, L0, L1, L4)
                 const uint32_t WUTWF : 1;  // Wakeup timer write flag
-                const uint32_t SHPF : 1;  // Shift operation pending
+                const uint32_t SHPF : 1;  // Shift operation pending (F0, F3, F4, F7, H7, L0, L1, L4)
                 const uint32_t INITS : 1;  // Initialization status flag
                 uint32_t RSF : 1;  // Registers synchronization flag
                 const uint32_t INITF : 1;  // Initialization flag
                 uint32_t INIT : 1;  // Initialization mode
                 uint32_t ALRAF : 1;  // Alarm A flag
-                uint32_t : 1;
+                uint32_t ALRBF : 1;  // Alarm B flag (F2, F3, F4, F7, H7, L0, L1, L4)
                 uint32_t WUTF : 1;  // Wakeup timer flag
                 uint32_t TSF : 1;  // Time-stamp flag
                 uint32_t TSOVF : 1;  // Time-stamp overflow flag
                 uint32_t TAMP1F : 1;  // RTC_TAMP1 detection flag
-                uint32_t TAMP2F : 1;  // RTC_TAMP2 detection flag
-                uint32_t TAMP3F : 1;  // RTC_TAMP3 detection flag
-                const uint32_t RECALPF : 1;  // Recalibration pending Flag
-                uint32_t : 15;
+                uint32_t TAMP2F : 1;  // RTC_TAMP2 detection flag (F0, F3, F4, F7, H7, L0, L1, L4)
+                uint32_t TAMP3F : 1;  // RTC_TAMP3 detection flag (F0, F3, F4, F7, H7, L0, L1, L4)
+                const uint32_t RECALPF : 1;  // Recalibration pending Flag (F0, F3, F4, F7, H7, L0, L1, L4)
+                uint32_t ITSF : 1;  // Internal Time-stamp flag (F7, H7, L4)
+                uint32_t : 14;
             } b;
         };
     };
