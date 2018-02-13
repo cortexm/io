@@ -76,24 +76,25 @@ struct Rtc {
                 uint32_t WUCKSEL : 3;  // Wakeup clock selection
                 uint32_t TSEDGE : 1;  // Time-stamp event active edge
                 uint32_t REFCKON : 1;  // RTC_REFIN reference clock detection enable
-                uint32_t BYPSHAD : 1;  // Bypass the shadow register
+                uint32_t BYPSHAD : 1;  // Bypass the shadow register (F0, F3, F4, F7, H7, L0, L1, L4)
                 uint32_t FMT : 1;  // Hour format
-                uint32_t : 1;
+                uint32_t DCE : 1;  // Coarse digital calibration enable (F2, F4, L1)
                 uint32_t ALRAE : 1;  // Alarm A enable
-                uint32_t : 1;
+                uint32_t ALRBE : 1;  // Alarm B enable  (F2, F3, F4, F7, H7, L0, L1, L4)
                 uint32_t WUTE : 1;  // Wakeup timer enable
                 uint32_t TSE : 1;  // Time-stamp enable
                 uint32_t ALRAIE : 1;  // Alarm A interrupt enable
-                uint32_t : 1;
+                uint32_t ALRBIE : 1;  // Alarm B interrupt enable (F2, F3, F4, F7, H7, L0, L1, L4)
                 uint32_t WUTIE : 1;  // Wakeup timer interrupt enable
                 uint32_t TSIE : 1;  // Time-stamp interrupt enable
                 uint32_t ADD1H : 1;  // Add one hour
                 uint32_t SUB1H : 1;  // Subtract 1 hour
                 uint32_t BKP : 1;  // Backup
-                uint32_t COSEL : 1;  // Calibration output selection
+                uint32_t COSEL : 1;  // Calibration output selection (F0, F4, F7, H7, L0, L1, L4)
                 uint32_t POL : 1;  // Output polarity
                 uint32_t OSEL : 2;  // Output selection
                 uint32_t COE : 1;  // Calibration output enable
+                uint32_t ITSE : 1;  // Time-stamp on internal event enable (F7, H7, L4)
                 uint32_t : 8;
             } b;
         };
