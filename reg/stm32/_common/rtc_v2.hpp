@@ -33,8 +33,8 @@ struct Rtc {
                 uint32_t SU : 4;  // Second units in BCD format
                 uint32_t ST : 3;  // Second tens in BCD format
                 uint32_t : 1;
-                uint32_t MU : 4;  // Minute units in BCD format
-                uint32_t MT : 3;  // Minute tens in BCD format
+                uint32_t MNU : 4;  // Minute units in BCD format
+                uint32_t MNT : 3;  // Minute tens in BCD format
                 uint32_t : 1;
                 uint32_t HU : 4;  // Hour units in BCD format
                 uint32_t HT : 2;  // Hour tens in BCD format
@@ -183,8 +183,8 @@ struct Rtc {
                 uint32_t SU : 4;  // Second units in BCD format
                 uint32_t ST : 3;  // Second tens in BCD format
                 uint32_t MSK1 : 1;  // Alarm A seconds mask
-                uint32_t MU : 4;  // Minute units in BCD format
-                uint32_t MT : 3;  // Minute tens in BCD format
+                uint32_t MNU : 4;  // Minute units in BCD format
+                uint32_t MNT : 3;  // Minute tens in BCD format
                 uint32_t MSK2 : 1;  // Alarm A minutes mask
                 uint32_t HU : 4;  // Hour units in BCD format
                 uint32_t HT : 2;  // Hour tens in BCD format
@@ -253,8 +253,8 @@ struct Rtc {
                 const uint32_t SU : 4;  // Second units in BCD format
                 const uint32_t ST : 3;  // Second tens in BCD format
                 uint32_t : 1;
-                const uint32_t MU : 4;  // Minute units in BCD format
-                const uint32_t MT : 3;  // Minute tens in BCD format
+                const uint32_t MNU : 4;  // Minute units in BCD format
+                const uint32_t MNT : 3;  // Minute tens in BCD format
                 uint32_t : 1;
                 const uint32_t HU : 4;  // Hour units in BCD format
                 const uint32_t HT : 2;  // Hour tens in BCD format
