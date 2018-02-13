@@ -6,7 +6,9 @@
 * MCUs containing this peripheral:
 *  - STM32F0xx
 *  - STM32F2xx (partial support)
+*  - STM32F3xx
 *  - STM32F4xx (partial support)
+*  - STM32F46+
 *  - STM32F7xx (partial support)
 *  - STM32H7xx (partial support)
 *  - STM32L0xx (partial support)
@@ -80,7 +82,7 @@ struct Rtc {
                 uint32_t FMT : 1;  // Hour format
                 uint32_t DCE : 1;  // Coarse digital calibration enable (F2, F4, L1)
                 uint32_t ALRAE : 1;  // Alarm A enable
-                uint32_t ALRBE : 1;  // Alarm B enable  (F2, F3, F4, F7, H7, L0, L1, L4)
+                uint32_t ALRBE : 1;  // Alarm B enable (F2, F3, F4, F7, H7, L0, L1, L4)
                 uint32_t WUTE : 1;  // Wakeup timer enable
                 uint32_t TSE : 1;  // Time-stamp enable
                 uint32_t ALRAIE : 1;  // Alarm A interrupt enable
@@ -95,7 +97,7 @@ struct Rtc {
                 uint32_t OSEL : 2;  // Output selection
                 uint32_t COE : 1;  // Calibration output enable
                 uint32_t ITSE : 1;  // Time-stamp on internal event enable (F7, H7, L4)
-                uint32_t : 8;
+                uint32_t : 7;
             } b;
         };
         struct Fmt {
@@ -174,9 +176,26 @@ struct Rtc {
         };
     };
 
-     /** Alarm A register
+    /** Calibration register (F2, F4, L1)
      */
-    struct Alarmar {
+    struct Calibr {
+        Calibr() {}
+        Calibr(uint32_t raw) { r = raw; }
+        union {
+            uint32_t r;
+            uint32_t WUT;
+            struct {
+                uint32_t DC : 5;  // Digital calibration
+                uint32_t : 2;
+                uint32_t DCS : 1;  // Digital calibration sign
+                uint32_t : 24;
+            } b;
+        };
+    };
+
+     /** Alarm register
+     */
+    struct Alarmr {
         Alarmar() {}
         Alarmar(uint32_t raw) { r = raw; }
         union {
@@ -215,7 +234,7 @@ struct Rtc {
         };
     };
 
-    /** Sub second register
+    /** Sub second register (F0, F3, F4, F7, H7, L0, L1, L4)
      */
     struct Ssr {
         Ssr() {}
@@ -229,7 +248,7 @@ struct Rtc {
         };
     };
 
-    /** Shift control register
+    /** Shift control register (F0, F3, F4, F7, H7, L0, L1, L4)
      */
     struct Shiftr {
         Shiftr() {}
@@ -285,7 +304,7 @@ struct Rtc {
         };
     };
 
-    /** Time-stamp sub second register
+    /** Time-stamp sub second register (F0, F3, F4, F7, H7, L0, L1, L4)
      */
     struct Tsssr {
         Tsssr() {}
@@ -299,7 +318,7 @@ struct Rtc {
         };
     };
 
-    /** calibration register
+    /** Calibration register (F0, F3, F4, F7, H7, L0, L1, L4)
      */
     struct Calr {
         Calr() {}
@@ -317,7 +336,7 @@ struct Rtc {
         };
     };
 
-    /** Tamper and alternate function configuration register
+    /** Tamper and alternate function configuration register (F0, F3, F46+, )
      */
     struct Tafcr {
         Tafcr() {}
@@ -351,7 +370,7 @@ struct Rtc {
 
     /** Alarm A sSub second register
      */
-    struct Alrmassr {
+    struct Alrmssr {
         Alrmassr() {}
         Alrmassr(uint32_t raw) { r = raw; }
         union {
@@ -365,25 +384,26 @@ struct Rtc {
         };
     };
 
-    volatile Tr TR;
-    volatile Dr DR;
-    volatile Cr CR;
-    volatile Isr ISR;
-    volatile Prer PRER;
-    volatile Wutr WUTR;
-    uint32_t __res0;
-    volatile Alarmar ALARMAR;
+    volatile Tr TR;  // Time register
+    volatile Dr DR;  // Date register
+    volatile Cr CR;  // Control register
+    volatile Isr ISR;  // Initialization and status register
+    volatile Prer PRER;  // Prescaler register
+    volatile Wutr WUTR;  // Wakeup timer register
+    volatile Calibr CALIBR;  // Calibration register (F2, F4, L1)
+    volatile Alarmr ALARMAR;  // Alarm A register
+    volatile Alarmr ALARMBR;  // Alarm B register (F2, F3, F4, F7, H7, L0, L1, L4)
+    volatile Wpr WPR;  // Write protection register
+    volatile Ssr SSR;  // Sub second register (F0, F3, F4, F7, H7, L0, L1, L4)
+    volatile Shiftr SHIFTR;  // Shift control register (F0, F3, F4, F7, H7, L0, L1, L4)
+    volatile Tstr TSTR;  // Time-stamp time register
+    volatile Tsdr TSDR;  // Time-stamp date register
+    volatile Tsssr TSSSR;  // Time-stamp sub second register (F0, F3, F4, F7, H7, L0, L1, L4)
+    volatile Calr CALR;  // Calibration register (F0, F3, F4, F7, H7, L0, L1, L4)
+    volatile Tafcr TAFCR;  // Tamper and alternate function configuration register
+    volatile Alrmssr ALRMASSR;  // Alarm A sSub second register
+    volatile Alrmssr ALRMBSSR;  // Alarm A sSub second register
     uint32_t __res1;
-    volatile Wpr WPR;
-    volatile Ssr SSR;
-    volatile Shiftr SHIFTR;
-    volatile Tstr TSTR;
-    volatile Tsdr TSDR;
-    volatile Tsssr TSSSR;
-    volatile Calr CALR;
-    volatile Tafcr TAFCR;
-    volatile Alrmassr ALRMASSR;
-    uint32_t __res2[2];
     volatile uint32_t BKP[32];  // (F0:5, F2:20, F3:32, F4:20, F7:32, L0:5, L1:32, L4:32, H7:32)
 };
 
