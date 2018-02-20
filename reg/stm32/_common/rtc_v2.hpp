@@ -196,8 +196,8 @@ struct Rtc {
      /** Alarm register
      */
     struct Alarmr {
-        Alarmar() {}
-        Alarmar(uint32_t raw) { r = raw; }
+        Alarmr() {}
+        Alarmr(uint32_t raw) { r = raw; }
         union {
             uint32_t r;
             struct {
@@ -371,8 +371,8 @@ struct Rtc {
     /** Alarm A sSub second register
      */
     struct Alrmssr {
-        Alrmassr() {}
-        Alrmassr(uint32_t raw) { r = raw; }
+        Alrmssr() {}
+        Alrmssr(uint32_t raw) { r = raw; }
         union {
             uint32_t r;
             struct {
