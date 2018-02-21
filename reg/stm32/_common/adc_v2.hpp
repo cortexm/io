@@ -127,7 +127,7 @@ struct Adc {
             uint32_t r;
             struct {
                 uint32_t OVSE : 1;  // Oversampler Enable (L0)
-                uint32_t : 1
+                uint32_t : 1;
                 uint32_t OVSR : 3;  // Oversampling ratio (L0)
                 uint32_t OVSS : 4;  // Oversampling shift (L0)
                 uint32_t TOVS : 1;  // Triggered Oversampling (L0)
@@ -282,9 +282,9 @@ struct Adc {
     volatile Chselr CHSELR;  // Channel selection register
     uint32_t __res2[5];
     volatile Dr DR;  // Data register
-    uint32_t __res2[28];
+    uint32_t __res3[28];
     volatile Calfactr CALFACTR;  // Calibration factor register (L0)
-    uint32_t __res3[148];
+    uint32_t __res4[148];
     volatile Ccr CCR;  // Commong configuration register
 };
 
