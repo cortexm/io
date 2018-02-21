@@ -5,9 +5,7 @@
 *
 * MCUs containing this peripheral:
 *  - STM32F0xx
-*  - STM32H7xx (partial support)
-*  - STM32L0xx (partial support)
-*  - STM32L4xx (partial support)
+*  - STM32L0xx
 */
 
 #pragma once
@@ -33,7 +31,9 @@ struct Adc {
                 uint32_t OVR : 1;  // ADC overrun
                 uint32_t : 2;
                 uint32_t AWD : 1;  // Analog watchdog flag
-                uint32_t : 24;
+                uint32_t : 3;
+                uint32_t EOCAL : 1;  // End Of Calibration flag (L0)
+                uint32_t : 20;
             } b;
         };
     };
@@ -53,7 +53,9 @@ struct Adc {
                 uint32_t OVRIE : 1;  // Overrun interrupt enable
                 uint32_t : 2;
                 uint32_t AWDIE : 1;  // Analog watchdog interrupt enable
-                uint32_t : 24;
+                uint32_t : 3;
+                uint32_t EOCALIE : 1;  // End Of Calibration flag interrupt enable (L0)
+                uint32_t : 20;
             } b;
         };
     };
@@ -71,7 +73,9 @@ struct Adc {
                 uint32_t ADSTART : 1;  // ADC start conversion command
                 uint32_t : 1;
                 uint32_t ADSTP : 1;  // ADC stop conversion command
-                uint32_t : 26;
+                uint32_t : 23;
+                uint32_t ADVREGEN : 1;  // ADC Voltage Regulator Enable (L0)
+                uint32_t : 2;
                 uint32_t ADCAL : 1;  // ADC calibration
             } b;
         };
@@ -122,9 +126,24 @@ struct Adc {
         union {
             uint32_t r;
             struct {
-                uint32_t : 30;
+                uint32_t OVSE : 1;  // Oversampler Enable (L0)
+                uint32_t : 1
+                uint32_t OVSR : 3;  // Oversampling ratio (L0)
+                uint32_t OVSS : 4;  // Oversampling shift (L0)
+                uint32_t TOVS : 1;  // Triggered Oversampling (L0)
+                uint32_t : 20;
                 uint32_t CKMODE : 2;  // ADC clock mode
             } b;
+        };
+        struct Ovsr {
+            static const uint32_t OVS_2 = 0;
+            static const uint32_t OVS_4 = 1;
+            static const uint32_t OVS_8 = 2;
+            static const uint32_t OVS_16 = 3;
+            static const uint32_t OVS_32 = 4;
+            static const uint32_t OVS_64 = 5;
+            static const uint32_t OVS_128 = 6;
+            static const uint32_t OVS_256 = 7;
         };
         struct Ckmode {
             static const uint32_t ADCCLK = 0;
@@ -220,7 +239,21 @@ struct Adc {
         };
     };
 
-    /** Commong configuration register
+    /** Calibration factor register (L0)
+     */
+    struct Calfactr {
+        Calfactr() {}
+        Calfactr(uint32_t raw) { r = raw; }
+        union {
+            uint32_t r;
+            struct {
+                uint32_t CALFACT : 7;  // Calibration factor
+                uint32_t : 25;
+            } b;
+        };
+    };
+
+    /** Common configuration register
      */
     struct Ccr {
         Ccr() {}
@@ -249,7 +282,9 @@ struct Adc {
     volatile Chselr CHSELR;  // Channel selection register
     uint32_t __res2[5];
     volatile Dr DR;  // Data register
-    uint32_t __res3[177];
+    uint32_t __res2[28];
+    volatile Calfactr CALFACTR;  // Calibration factor register (L0)
+    uint32_t __res3[148];
     volatile Ccr CCR;  // Commong configuration register
 };
 
