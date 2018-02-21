@@ -250,9 +250,19 @@ struct Usart {
         };
     };
 
-    /** data register
+    /** Receiver data register
      */
-    struct Dr {
+    struct Rdr {
+        union {
+            uint32_t r;
+            const uint32_t DR;  // Data register
+            const uint16_t DR16;  // 16 bit access
+        };
+    };
+
+    /** Transceiver data register
+     */
+    struct Tdr {
         union {
             uint32_t r;
             uint32_t DR;  // Data register
@@ -269,8 +279,8 @@ struct Usart {
     volatile Rqr RQR;  // Request register
     volatile Isr ISR;  // Interrupt and status register
     volatile Icr ICR;  // Interrupt flag clear register
-    volatile Dr RDR;  // Receiver data register
-    volatile Dr TDR;  // Transceiver data register
+    volatile Rdr RDR;  // Receiver data register
+    volatile Tdr TDR;  // Transceiver data register
 };
 
 static inline constexpr Usart &USART(const size_t base) {
