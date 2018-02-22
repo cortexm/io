@@ -60,19 +60,19 @@ struct Dma {
             } b;
         };
 
-        inline bool GIF(const unsigned channel) const {
+        inline bool GIF(const unsigned channel) volatile const {
             return r & 1 << ((channel - 1) << 2);
         }
 
-        inline bool TCIF(const unsigned channel) const {
+        inline bool TCIF(const unsigned channel) volatile const {
             return r & 2 << ((channel - 1) << 2);
         }
 
-        inline bool HTIF(const unsigned channel) const {
+        inline bool HTIF(const unsigned channel) volatile const {
             return r & 4 << ((channel - 1) << 2);
         }
 
-        inline bool TEIF(const unsigned channel) const {
+        inline bool TEIF(const unsigned channel) volatile const {
             return r & 8 << ((channel - 1) << 2);
         }
     };
@@ -122,23 +122,23 @@ struct Dma {
         static const unsigned HTIF = 4;
         static const unsigned TEIF = 8;
 
-        inline void clear_flags(const unsigned channel, unsigned val=GIF | TCIF | HTIF | TEIF) {
+        inline void clear_flags(const unsigned channel, unsigned val=GIF | TCIF | HTIF | TEIF) volatile {
             r = val << ((channel - 1) << 2);
         }
 
-        inline void CGIF(const unsigned channel) {
+        inline void CGIF(const unsigned channel) volatile {
             clear_flags(channel, GIF);
         }
 
-        inline void CTCIF(const unsigned channel) {
+        inline void CTCIF(const unsigned channel) volatile {
             clear_flags(channel, TCIF);
         }
 
-        inline void CHTIF(const unsigned channel) {
+        inline void CHTIF(const unsigned channel) volatile {
             clear_flags(channel, HTIF);
         }
 
-        inline void CTEIF(const unsigned channel) {
+        inline void CTEIF(const unsigned channel) volatile {
             clear_flags(channel, TEIF);
         }
     };
@@ -236,11 +236,11 @@ struct Dma {
                 uint32_t : 4;
             } b;
         };
-        inline void set(const unsigned channel, const unsigned request) {
+        inline void set(const unsigned channel, const unsigned request) volatile {
             r &= ~(0x0f << (channel << 2));
             r |= (request & 0x0f) << (channel << 2);
         }
-        inline unsigned get(const unsigned channel) const {
+        inline unsigned get(const unsigned channel) volatile const {
             return 0x0f & (r >> (channel << 2));
         }
     };
