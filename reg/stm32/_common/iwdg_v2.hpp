@@ -23,32 +23,29 @@ struct Iwdg {
     /** Key register
      */
     struct Kr {
-        Kr() {}
-        Kr(uint32_t raw) { r = raw; }
+        Kr(const uint32_t raw=0) { r = raw; }
+
+        static const uint32_t WRITE_ACCESS = 0x00005555;
+        static const uint32_t REFRESH = 0x0000aaaa;
+        static const uint32_t START = 0x0000cccc;
+
         union {
             uint32_t r;
             uint32_t KEY;  // Key value
             uint16_t KEY16;  // 16 bit access
         };
-        static const uint32_t WRITE_ACCESS = 0x00005555;
-        static const uint32_t REFRESH = 0x0000aaaa;
-        static const uint32_t START = 0x0000cccc;
     };
 
     /** Prescaler register
      */
     struct Pr {
-        Pr() {}
-        Pr(uint32_t raw) { r = raw; }
-        union {
-            uint32_t r;
-            uint32_t PRE;  // 32 bit access
-            uint16_t PRE16;  // 16 bit access
-            struct {
-                uint32_t PRE : 3;  // prescaler divider
-                uint32_t : 29;
-            } b;
+        Pr(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t PRE : 3;  // prescaler divider
+            uint32_t : 29;
         };
+
         struct Pre {
             static const uint32_t DIV_4 = 0;
             static const uint32_t DIV_8 = 1;
@@ -58,45 +55,56 @@ struct Iwdg {
             static const uint32_t DIV_128 = 5;
             static const uint32_t DIV_256 = 6;
         };
+
+        union {
+            uint32_t r;
+            uint32_t PRE;  // 32 bit access
+            uint16_t PRE16;  // 16 bit access
+            Bits b;
+        };
     };
 
     /** Reload register
      */
     struct Rlr {
-        Rlr() {}
-        Rlr(uint32_t raw) { r = raw; }
+        Rlr(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t RL : 12;  // Watchdog counter reload value
+            uint32_t : 20;
+        };
+
         union {
             uint32_t r;
             uint32_t RL;  // 32 bit access
             uint16_t RL16;  // 16 bit access
-            struct {
-                uint32_t RL : 12;  // Watchdog counter reload value
-                uint32_t : 20;
-            } b;
+            Bits b;
         };
     };
 
     /** Status register
      */
     struct Sr {
-        Sr() {}
-        Sr(uint32_t raw) { r = raw; }
+        Sr(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            const uint32_t PVU : 1;  // Watchdog prescaler value update
+            const uint32_t RVU : 1;  // Watchdog counter reload value update
+            const uint32_t WVU : 1;  // Watchdog counter window value update
+            uint32_t : 29;
+        };
+
         union {
             uint32_t r;
-            struct {
-                const uint32_t PVU : 1;  // Watchdog prescaler value update
-                const uint32_t RVU : 1;  // Watchdog counter reload value update
-                const uint32_t WVU : 1;  // Watchdog counter window value update
-                uint32_t : 29;
-            } b;
+            Bits b;
         };
     };
 
     /** Window register
      */
     struct Winr {
-        Winr() {}
-        Winr(uint32_t raw) { r = raw; }
+        Winr(const uint32_t raw=0) { r = raw; }
+
         union {
             uint32_t r;
             uint32_t WIN;  // Key value

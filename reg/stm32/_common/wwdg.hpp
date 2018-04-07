@@ -26,51 +26,58 @@ struct Wwdg {
     /** Control register
      */
     struct Cr {
-        Cr() {}
-        Cr(uint32_t raw) { r = raw; }
+        Cr(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t T : 7;  // 7-bit counter (MSB to LSB)
+            uint32_t WDGA : 1;  // Activation bit
+            uint32_t : 24;
+        };
+
         union {
             uint32_t r;
-            struct {
-                uint32_t T : 7;  // 7-bit counter (MSB to LSB)
-                uint32_t WDGA : 1;  // Activation bit
-                uint32_t : 24;
-            } b;
+            Bits b;
         };
     };
 
     /** Configuration register
      */
     struct Cfr {
-        Cfr() {}
-        Cfr(uint32_t raw) { r = raw; }
-        union {
-            uint32_t r;
-            struct {
-                uint32_t T : 7;  // 7-bit window value
-                uint32_t WDGTB : 2;  // Timer base
-                uint32_t EWI : 1;  // Early wakeup interrupt
-                uint32_t : 22;
-            } b;
+        Cfr(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t T : 7;  // 7-bit window value
+            uint32_t WDGTB : 2;  // Timer base
+            uint32_t EWI : 1;  // Early wakeup interrupt
+            uint32_t : 22;
         };
+
         struct Wdgtb {
             static const uint32_t DIV_1 = 0;
             static const uint32_t DIV_2 = 1;
             static const uint32_t DIV_4 = 2;
             static const uint32_t DIV_8 = 3;
         };
+
+        union {
+            uint32_t r;
+            Bits b;
+        };
     };
 
     /** Status register
      */
     struct Sr {
-        Sr() {}
-        Sr(uint32_t raw) { r = raw; }
+        Sr(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t EWIF : 1;  // Early wakeup interrupt flag
+            uint32_t : 31;
+        };
+
         union {
             uint32_t r;
-            struct {
-                uint32_t EWIF : 1;  // Early wakeup interrupt flag
-                uint32_t : 31;
-            } b;
+            Bits b;
         };
     };
 
