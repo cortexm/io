@@ -22,18 +22,20 @@ struct Systick {
     /** SysTick control and status register
      */
     struct Csr {
-        Csr() {}
-        Csr(uint32_t raw) { r = raw; }
+        Csr(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t ENABLE : 1;  // Counter enable
+            uint32_t TICKINT : 1;  // SysTick exception request enable
+            uint32_t CLKSOURCE : 1;  // Clock source selection
+            uint32_t : 13;
+            uint32_t COUNTFLAG : 1;  // Returns 1 if timer counted to 0 since last time this was read.
+            uint32_t : 15;
+        };
+
         union {
             uint32_t r;
-            struct {
-                uint32_t ENABLE : 1;  // Counter enable
-                uint32_t TICKINT : 1;  // SysTick exception request enable
-                uint32_t CLKSOURCE : 1;  // Clock source selection
-                uint32_t : 13;
-                uint32_t COUNTFLAG : 1;  // Returns 1 if timer counted to 0 since last time this was read.
-                uint32_t : 15;
-            } b;
+            Bits b;
         };
 
         struct Clksource {
@@ -45,12 +47,16 @@ struct Systick {
     /** SysTick reload value register
      */
     struct Load {
+        Load(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t RELOAD : 24;  // reload value
+            uint32_t : 8;
+        };
+
         union {
             uint32_t r;
-            struct {
-                uint32_t RELOAD : 24;  // reload value
-                uint32_t : 8;
-            } b;
+            Bits b;
             uint32_t RELOAD;  // direct 32 bit access to RELOAD
         };
     };
@@ -58,12 +64,16 @@ struct Systick {
     /** SysTick current value register
      */
     struct Val {
+        Val(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t CURRENT : 24;  // current counter value
+            uint32_t : 8;
+        };
+
         union {
             uint32_t r;
-            struct {
-                uint32_t CURRENT : 24;  // current counter value
-                uint32_t : 8;
-            } b;
+            Bits b;
             uint32_t CURRENT;  // direct 32 bit access to COUNTER
         };
     };
@@ -71,16 +81,18 @@ struct Systick {
     /** SysTick calibration value register
      */
     struct Calib {
-        Calib() {}
-        Calib(uint32_t raw) { r = raw; }
+        Calib(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            const uint32_t TENMS : 24;  // Calibration value
+            uint32_t : 6;
+            const uint32_t SKEW : 1;  // Indicates whether the TENMS value is exact
+            const uint32_t NOREF : 1;  // No reference clock to the processor
+        };
+
         union {
             uint32_t r;
-            struct {
-                const uint32_t TENMS : 24;  // Calibration value
-                uint32_t : 6;
-                const uint32_t SKEW : 1;  // Indicates whether the TENMS value is exact
-                const uint32_t NOREF : 1;  // No reference clock to the processor
-            } b;
+            Bits b;
         };
     };
 

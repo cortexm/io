@@ -23,14 +23,16 @@ struct Nvic {
      * This register is on Cortex-M3, M4 and M7
      */
     struct Stir {
-        Stir() {}
-        Stir(uint32_t raw) { r = raw; }
+        Stir(const uint32_t raw=0) { r = raw; }
+
+        struct Bits {
+            uint32_t INTID : 9;  // Software generated interrupt ID
+            uint32_t : 23;
+        };
+
         union {
             uint32_t r;
-            struct {
-                uint32_t INTID : 9;  // Software generated interrupt ID
-                uint32_t : 23;
-            } b;
+            Bits b;
             uint32_t INTID;  // direct 32 bit access to INTID
         };
     };
