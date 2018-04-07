@@ -21,14 +21,16 @@ struct Sysmem {
     /** Unique device ID
      */
     struct Uid {
+        struct Bits {
+            const uint16_t X;  // x-coordinate
+            const uint16_t Y;  // y-coordinate
+            const uint8_t WAF;  // Wafer number
+            const uint8_t LOT[7];  // Lot number
+        };
+
         union {
             uint32_t r[3];
-            struct {
-                uint16_t X;  // x-coordinate
-                uint16_t Y;  // y-coordinate
-                uint8_t WAF;  // Wafer number
-                uint8_t LOT[7];  // Lot number
-            } b;
+            Bits b;
         };
     };
 
