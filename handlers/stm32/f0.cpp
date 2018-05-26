@@ -49,7 +49,7 @@ extern void DUMMY_handler();
 
 // Vector table for handlers
 // This array will be placed in ".vectors" section defined in linker script.
-__attribute__((section(".vectors_stm32"), used)) void (*isr_vectors_stm32[])() = {
+__attribute__((section(".vectors_stm32"), used)) void (*__isr_vectors_stm32[])() = {
     WWDG_handler,
     PVD_handler,
     RTC_handler,

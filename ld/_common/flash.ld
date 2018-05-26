@@ -1,27 +1,48 @@
 SECTIONS {
     . = ORIGIN(FLASH);
-    .text : {
+    .stack : {
         KEEP(*(.stack))
+    } >FLASH
+
+    .vectors : {
         KEEP(*(.vectors))
         KEEP(*(.vectors*))
+    } >FLASH
+
+    .text ALIGN(4) : {
         KEEP(*(.text))
-        . = ALIGN(4);
         *(.text*)
-        . = ALIGN(4);
+    } >FLASH
+
+    .rodata ALIGN(4) : {
         KEEP(*(.rodata))
         *(.rodata*)
         . = ALIGN(4);
     } >FLASH
 
+    .preinit_array ALIGN(4): {
+        __preinit_array_start = .;
+        KEEP(*(.preinit_array))
+        __preinit_array_end = .;
+    } >FLASH
+
     .init_array ALIGN(4): {
-        _init_array_start = .;
+        __init_array_start = .;
         KEEP(*(.init_array))
-        _init_array_end = .;
+        __init_array_end = .;
     } >FLASH
 
     .fini_array ALIGN(4): {
-        _fini_array_start = .;
+        __fini_array_start = .;
         KEEP(*(.fini_array))
-        _fini_array_end = .;
+        __fini_array_end = .;
     } >FLASH
+
+    /DISCARD/ : {
+        *(.ARM.exidx*)
+        *(.gnu.linkonce.armexidx.*)
+        *(.ARM.attributes)
+        *(.debug_frame)
+        *(.comment)
+    }
 }

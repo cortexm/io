@@ -6,17 +6,17 @@
 #pragma once
 
 // data
-extern unsigned _data_start;
-extern unsigned _data_end;
+extern unsigned __data_start;
+extern unsigned __data_end;
 // data load
-extern unsigned _data_load;
+extern unsigned __data_load;
 
 /** Copy statically defined variables
  */
 inline void copy_data() {
-    unsigned *src = &_data_load;
-    unsigned *dst = &_data_start;
-    while (dst < &_data_end) {
+    unsigned *src = &__data_load;
+    unsigned *dst = &__data_start;
+    while (dst < &__data_end) {
         *dst++ = *src++;
     }
 }

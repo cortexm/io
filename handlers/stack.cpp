@@ -3,7 +3,7 @@
  */
 
 // top of stack
-extern unsigned _stacktop;
+extern unsigned __stacktop;
 
 // put top of stack into ".stack" section
-__attribute__((section(".stack"), used)) unsigned *stack_init = &_stacktop;
+__attribute__((section(".stack"), used)) unsigned *__stack_init = &__stacktop;
