@@ -6,6 +6,7 @@
 - C++ support only (actually GCC)
 - Objective access to MCU peripherals and registers.
 - Avoid usage of `#define` or other C mess.
+- Include some basic startup code
 
 ## Notice
 
