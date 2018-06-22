@@ -105,10 +105,16 @@ struct Iwdg {
     struct Winr {
         Winr(const uint32_t raw=0) { r = raw; }
 
+        struct Bits {
+            uint32_t WIN : 12;  // Watchdog counter reload value
+            uint32_t : 20;
+        };
+
         union {
             uint32_t r;
             uint32_t WIN;  // Key value
             uint16_t WIN16;  // 16 bit access
+            Bits b;
         };
     };
 
