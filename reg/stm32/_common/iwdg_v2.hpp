@@ -74,6 +74,10 @@ struct Iwdg {
             uint32_t : 20;
         };
 
+        struct Rl {
+            static const uint32_t MAX = 0x00000fff;
+        };
+
         union {
             uint32_t r;
             uint32_t RL;  // 32 bit access
