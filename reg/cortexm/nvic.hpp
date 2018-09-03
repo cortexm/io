@@ -55,14 +55,14 @@ struct Nvic {
      * @param isr interrupt ID
      */
     inline void iser(uint32_t isr) {
-        ISER[isr >> 5] = 1 << (isr & 0x1f);
+        ISER[isr >> 5] = static_cast<uint32_t>(1 << (isr & 0x1f));
     }
 
     /** Disable interrupt
      * @param isr interrupt ID
      */
     inline void icer(uint32_t isr) {
-        ICER[isr >> 5] = 1 << (isr & 0x1f);
+        ICER[isr >> 5] = static_cast<uint32_t>(1 << (isr & 0x1f));
     }
 
     /** Is interrupt enabled
@@ -70,21 +70,21 @@ struct Nvic {
      * @return True if interrupt is enabled
      */
     inline bool ier(uint32_t isr) const {
-        return ISER[isr >> 5] & 1 << (isr & 0x1f);
+        return ISER[isr >> 5] & static_cast<uint32_t>(1 << (isr & 0x1f));
     }
 
     /** Enable pending interrupt
      * @param isr interrupt ID
      */
     inline void ispr(uint32_t isr) {
-        ISPR[isr >> 5] = 1 << (isr & 0x1f);
+        ISPR[isr >> 5] = static_cast<uint32_t>(1 << (isr & 0x1f));
     }
 
     /** Disable pending interrupt
      * @param isr interrupt ID
      */
     inline void icpr(uint32_t isr) {
-        ICPR[isr >> 5] = 1 << (isr & 0x1f);
+        ICPR[isr >> 5] = static_cast<uint32_t>(1 << (isr & 0x1f));
     }
 
     /** Is pending interrupt
@@ -92,7 +92,7 @@ struct Nvic {
      * @return True if interrupt is enabled
      */
     inline bool ipr(uint32_t isr) const {
-        return ISPR[isr >> 5] & 1 << (isr & 0x1f);
+        return ISPR[isr >> 5] & static_cast<uint32_t>(1 << (isr & 0x1f));
     }
 
     /** Is interrupt active
@@ -100,7 +100,7 @@ struct Nvic {
      * @return True if interrupt is active
      */
     inline bool iabr(uint32_t isr) const {
-        return IABR[isr >> 5] & 1 << (isr & 0x1f);
+        return IABR[isr >> 5] & static_cast<uint32_t>(1 << (isr & 0x1f));
     }
 
     /** Enable global interrupt

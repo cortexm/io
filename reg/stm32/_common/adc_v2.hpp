@@ -244,11 +244,11 @@ struct Adc {
         };
 
         inline void set(const uint32_t ch) volatile {
-            r |= 1 << ch;
+            r |= static_cast<uint32_t>(1 << ch);
         }
 
         inline void clr(const uint32_t ch) volatile {
-            r &= ~(1 << ch);
+            r &= ~static_cast<uint32_t>(1 << ch);
         }
     };
 

@@ -63,19 +63,19 @@ struct Dma {
         };
 
         inline bool GIF(const unsigned channel) volatile const {
-            return r & 1 << ((channel - 1) << 2);
+            return r & static_cast<uint32_t>(1 << ((channel - 1) << 2));
         }
 
         inline bool TCIF(const unsigned channel) volatile const {
-            return r & 2 << ((channel - 1) << 2);
+            return r & static_cast<uint32_t>(2 << ((channel - 1) << 2));
         }
 
         inline bool HTIF(const unsigned channel) volatile const {
-            return r & 4 << ((channel - 1) << 2);
+            return r & static_cast<uint32_t>(4 << ((channel - 1) << 2));
         }
 
         inline bool TEIF(const unsigned channel) volatile const {
-            return r & 8 << ((channel - 1) << 2);
+            return r & static_cast<uint32_t>(8 << ((channel - 1) << 2));
         }
     };
 
@@ -246,7 +246,7 @@ struct Dma {
         };
 
         inline void set(const unsigned channel, const unsigned request) volatile {
-            r &= ~(0x0f << (channel << 2));
+            r &= ~static_cast<uint32_t>(0x0f << (channel << 2));
             r |= (request & 0x0f) << (channel << 2);
         }
 

@@ -60,8 +60,8 @@ struct Gpio {
             uint32_t MODER;
         };
 
-        inline void set(const unsigned pin, const uint16_t mode) volatile {
-            r &= ~(3 << (pin << 1));
+        inline void set(const unsigned pin, const uint32_t mode) volatile {
+            r &= ~static_cast<uint32_t>(3 << (pin << 1));
             r |= (mode & 3) << (pin << 1);
         }
 
@@ -108,9 +108,9 @@ struct Gpio {
 
         inline void set(const unsigned pin, const uint32_t otype) volatile {
             if (otype == Otype::PUSH_PULL)
-                r &= ~(1 << pin);
+                r &= ~static_cast<uint32_t>(1 << pin);
             else
-                r |= 1 << pin;
+                r |= static_cast<uint32_t>(1 << pin);
         }
 
         inline uint32_t get(const unsigned pin) volatile const {
@@ -156,7 +156,7 @@ struct Gpio {
         };
 
         inline void set(const unsigned pin, const uint32_t ospeed) volatile {
-            r &= ~(3 << (pin << 1));
+            r &= ~static_cast<uint32_t>(3 << (pin << 1));
             r |= (ospeed & 3) << (pin << 1);
         }
 
@@ -202,7 +202,7 @@ struct Gpio {
         };
 
         inline void set(const unsigned pin, const uint32_t pupd) volatile {
-            r &= ~(3 << (pin << 1));
+            r &= ~static_cast<uint32_t>(3 << (pin << 1));
             r |= (pupd & 3) << (pin << 1);
         }
 
@@ -408,7 +408,7 @@ struct Gpio {
 
         inline void set(const unsigned pin, const unsigned af) volatile {
             uint32_t tmp = r[pin >> 3];
-            tmp &= ~ (0x0f << ((pin & 7) << 2));
+            tmp &= ~static_cast<uint32_t>(0x0f << ((pin & 7) << 2));
             tmp |= (af & 0xf) << ((pin & 7) << 2);
             r[pin >> 3] = tmp;
         }
@@ -492,9 +492,9 @@ struct Gpio {
 
         inline void set(const unsigned pin, const uint32_t acs) volatile {
             if (acs == Acs::CONNECTED)
-                r &= ~(1 << pin);
+                r &= ~static_cast<uint32_t>(1 << pin);
             else
-                r |= 1 << pin;
+                r |= static_cast<uint32_t>(1 << pin);
         }
 
         inline uint32_t get(const unsigned pin) volatile const {
