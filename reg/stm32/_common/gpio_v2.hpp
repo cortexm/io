@@ -335,11 +335,11 @@ struct Gpio {
         };
 
         inline void set(const unsigned pin) volatile {
-            h.BS = 1 << pin;
+            h.BS = static_cast<uint16_t>(1 << pin);
         }
 
         inline void clr(const unsigned pin) volatile {
-            h.BR = 1 << pin;
+            h.BR = static_cast<uint16_t>(1 << pin);
         }
     };
 
@@ -450,7 +450,7 @@ struct Gpio {
         };
 
         inline void clr(const unsigned pin) volatile {
-            BR = 1 << pin;
+            BR = static_cast<uint16_t>(1 << pin);
         }
     };
 
