@@ -47,9 +47,12 @@ __attribute__((weak, alias("__stop_stm32"))) void USB_handler();
 // Dummy handler (for unused vectors)
 extern void DUMMY_handler();
 
+// handler functions table type definition
+typedef void (*handler_t)();
+
 // Vector table for handlers
 // This array will be placed in ".vectors" section defined in linker script.
-__attribute__((section(".vectors_stm32"), used)) void (*__isr_vectors_stm32[])() = {
+__attribute__((section(".vectors_stm32"), used)) handler_t __isr_vectors_stm32[] = {
     WWDG_handler,
     PVD_handler,
     RTC_handler,

@@ -4,11 +4,11 @@
 
 #pragma once
 
-typedef void (*array_func_t[])();
+typedef void (*array_func_t)();
 
 // pre-constructors array
-extern array_func_t __preinit_array_start;
-extern array_func_t __preinit_array_end;
+extern array_func_t __preinit_array_start[];
+extern array_func_t __preinit_array_end[];
 
 /** call pre-constructors for static objects
  */
@@ -21,8 +21,8 @@ inline void call_preinit_array() {
 }
 
 // constructors array
-extern array_func_t __init_array_start;
-extern array_func_t __init_array_end;
+extern array_func_t __init_array_start[];
+extern array_func_t __init_array_end[];
 
 /** call constructors for static objects
  */
@@ -35,8 +35,8 @@ inline void call_init_array() {
 }
 
 // destructors array
-extern array_func_t __fini_array_start;
-extern array_func_t __fini_array_end;
+extern array_func_t __fini_array_start[];
+extern array_func_t __fini_array_end[];
 
 /** call destructors for static objects
  */
