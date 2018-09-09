@@ -2,6 +2,8 @@
  * Handlers setup code for Cortex-M.
  */
 
+#include "io/lib/io_def.hpp"
+
 // Undefined handler is pointing to this function, this stop MCU.
 // This function name must by not mangled, so must be C,
 // because alias("..") is working only with C code
@@ -24,12 +26,9 @@ __attribute__((weak, alias("__stop"))) void SYSTICK_handler();
 // Dummy handler (for unused vectors)
 __attribute__((weak, alias("__stop"))) void DUMMY_handler();
 
-// handler functions table type definition
-typedef void (*handler_t)();
-
 // Vector table for handlers
 // This array will be placed in ".vectors" section defined in linker script.
-__attribute__((section(".vectors"), used)) handler_t __isr_vectors[] = {
+__attribute__((section(".vectors"), used)) ptr_func_t __isr_vectors[] = {
     RESET_handler,
     NMI_handler,
     HARDFAULT_handler,
