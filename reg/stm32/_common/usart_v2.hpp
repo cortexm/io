@@ -55,9 +55,9 @@ struct Usart {
         };
     };
 
+    /** Control register 2
+     */
     struct Cr2 {
-        /** Control register 2
-         */
         Cr2(const uint32_t raw=0) { r = raw; }
 
         struct Bits {
@@ -89,9 +89,9 @@ struct Usart {
         };
     };
 
+    /** Control register 3
+     */
     struct Cr3 {
-        /** Control register 1
-         */
         Cr3(const uint32_t raw=0) { r = raw; }
 
         struct Bits {

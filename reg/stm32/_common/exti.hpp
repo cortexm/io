@@ -203,6 +203,8 @@ struct Exti {
         }
     };
 
+    /** Pending register
+     */
     struct Pr {
         Pr(const uint32_t raw=0) { r = raw; }
 
