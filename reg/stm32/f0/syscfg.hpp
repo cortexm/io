@@ -66,6 +66,18 @@ struct Syscfg {
     /** external interrupt configuration register 1
      */
     struct Exticr {
+        Afr() {
+            for (int i = 0; i < 4) {
+                r[i] = 0;
+            }
+        }
+
+        Afr(Acr &acr) {
+            for (int i = 0; i < 4) {
+                r[i] = acr.r[i];
+            }
+        }
+
         struct Bits {
             uint16_t EXTI0 : 4;  // select EXTI source
             uint16_t EXTI1 : 4;
@@ -104,9 +116,9 @@ struct Syscfg {
         };
     };
 
+    /** configuration register 2
+     */
     struct Cfgr2 {
-        /** configuration register 2
-         */
         Cfgr2(const uint32_t raw=0) { r = raw; }
 
         struct Bits {
