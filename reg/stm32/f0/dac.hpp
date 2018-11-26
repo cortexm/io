@@ -261,7 +261,7 @@ struct Dac {
      */
     struct Dhrdor1 {
         struct Bits {
-            uint32_t DACC1DOR : 16;  // DAC channel 1 data output
+            const uint32_t DACC1DOR : 16;  // DAC channel 1 data output
             uint32_t : 16;
         };
 
@@ -275,7 +275,7 @@ struct Dac {
      */
     struct Dhrdor2 {
         struct Bits {
-            uint32_t DACC2DOR : 16;  // DAC channel 2 data output
+            const uint32_t DACC2DOR : 16;  // DAC channel 2 data output
             uint32_t : 16;
         };
 
@@ -285,7 +285,7 @@ struct Dac {
         };
     };
 
-    /** DAC Channel 2 data output register
+    /** DAC status register
      */
     struct Sr {
         struct Bits {
@@ -303,19 +303,19 @@ struct Dac {
     };
 
     volatile Cr CR;  // Control register
-    volatile Swtrigr SWTRIGR;  // Initial CRC value
-    volatile Dhr12r1 DHR12R1;
-    volatile Dhr12l1 DHR12L1;
-    volatile Dhr8r1 DHR8R1;
-    volatile Dhr12r2 DHR12R2;
-    volatile Dhr12l2 DHR12L2;
-    volatile Dhr8r2 DHR8R2;
-    volatile Dhr12rd DHR12RD;
-    volatile Dhr12ld DHR12LD;
-    volatile Dhr8rd DHR8RD;
-    volatile Dhrdor1 DHRDOR1;
-    volatile Dhrdor2 DHRDOR2;
-    volatile Sr SR;
+    volatile Swtrigr SWTRIGR;  // DAC software trigger register
+    volatile Dhr12r1 DHR12R1;  // DAC channel 1 12-bit right-aligned data holding register
+    volatile Dhr12l1 DHR12L1;  // DAC channel 1 12-bit left-aligned data holding register
+    volatile Dhr8r1 DHR8R1;  // DAC channel 1 8-bit right-aligned data holding register
+    volatile Dhr12r2 DHR12R2;  // DAC channel 2 12-bit right-aligned data holding register
+    volatile Dhr12l2 DHR12L2;  // DAC channel 2 12-bit left-aligned data holding register
+    volatile Dhr8r2 DHR8R2;  // DAC channel 2 8-bit right-aligned data holding register
+    volatile Dhr12rd DHR12RD;  // Dual DAC 12-bit right-aligned data holding register
+    volatile Dhr12ld DHR12LD;  // Dual DAC 12-bit left-aligned data holding register
+    volatile Dhr8rd DHR8RD;  // Dual DAC 8-bit right-aligned data holding register
+    volatile Dhrdor1 DHRDOR1;  // DAC Channel 1 data output register
+    volatile Dhrdor2 DHRDOR2;  // DAC Channel 2 data output register
+    volatile Sr SR;  // DAC status register
 };
 
 namespace base {
