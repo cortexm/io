@@ -97,7 +97,7 @@ struct Comp {
 
 namespace base {
 
-static constexpr size_t COMP = 0x40023000;
+static constexpr size_t COMP = 0x40010000;
 
 }
 
