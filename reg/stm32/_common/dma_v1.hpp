@@ -171,23 +171,47 @@ struct Dma {
                 uint32_t : 17;
             };
 
-            struct Size {
-                static const uint32_t SIZE_8 = 0;
-                static const uint32_t SIZE_16 = 1;
-                static const uint32_t SIZE_32 = 2;
+            enum class Size : uint32_t {
+                SIZE_8 = 0,
+                SIZE_16 = 1,
+                SIZE_32 = 2,
             };
 
-            struct Pl {
-                static const uint32_t LOW = 0;
-                static const uint32_t MEDIUM = 1;
-                static const uint32_t HIGH = 2;
-                static const uint32_t VERY_HIGH = 3;
+            enum class Pl : uint32_t {
+                LOW = 0,
+                MEDIUM = 1,
+                HIGH = 2,
+                VERY_HIGH = 3,
             };
 
             union {
                 uint32_t r;
                 Bits b;
             };
+
+            void PSIZE(Size size) {
+                b.PSIZE = 0x03 & static_cast<uint32_t>(size);
+            }
+
+            Size PSIZE() {
+                return static_cast<Size>(b.PSIZE);
+            }
+
+            void MSIZE(Size size) {
+                b.MSIZE = 0x03 & static_cast<uint32_t>(size);
+            }
+
+            Size MSIZE() {
+                return static_cast<Size>(b.MSIZE);
+            }
+
+            void PL(Pl pl) {
+                b.PL = 0x03 & static_cast<uint32_t>(pl);
+            }
+
+            Pl PL() {
+                return static_cast<Pl>(b.PL);
+            }
         };
 
         /** Number of data register
@@ -202,19 +226,23 @@ struct Dma {
         /** Peripheral address register
          */
         struct Cpar {
-            union {
-                uint32_t r;
-                size_t PAR;  // Peripheral Address
-            };
+            uint32_t r;
+
+            template <typename T>
+            void PAR(T *par) volatile {
+                r = reinterpret_cast<uint32_t>(par);
+            }
         };
 
         /** Memory address register
          */
         struct Cmar {
-            union {
-                uint32_t r;
-                size_t MAR;  // Memory Adress
-            };
+            uint32_t r;
+
+            template <typename T>
+            void MAR(T *mar) volatile {
+                r = reinterpret_cast<uint32_t>(mar);
+            }
         };
 
         volatile Ccr CCR;  // Configuration register
